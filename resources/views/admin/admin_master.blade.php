@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('/') }}backend/plugins/fontawesome-free/css/all.min.css">
+
+  {{-- line awesome icon cdn --}}
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"/>
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{ asset('/') }}backend/https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <!-- Tempusdominus Bootstrap 4 -->
@@ -26,6 +29,19 @@
   <link rel="stylesheet" href="{{ asset('/') }}backend/plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="{{ asset('/') }}backend/plugins/summernote/summernote-bs4.min.css">
+
+  {{-- jquery cdn --}}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   {{-- toastr cdn --}}
+	<link rel="stylesheet" type="text/css"
+     href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+    {{-- sweet alert cdn --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -52,7 +68,7 @@
 <!-- ./wrapper -->
 
 <!-- jQuery -->
-<script src="{{ asset('/') }}backend/plugins/jquery/jquery.min.js"></script>
+{{-- <script src="{{ asset('/') }}backend/plugins/jquery/jquery.min.js"></script> --}}
 <!-- jQuery UI 1.11.4 -->
 <script src="{{ asset('/') }}backend/plugins/jquery-ui/jquery-ui.min.js"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
@@ -83,5 +99,69 @@
 <script src="{{ asset('/') }}backend/dist/js/adminlte.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ asset('/') }}backend/dist/js/pages/dashboard.js"></script>
+
+{{-- toastr js --}}
+<script>
+    @if(Session::has('message'))
+    toastr.options =
+    {
+        "closeButton" : true,
+        "progressBar" : true
+    }
+            toastr.success("{{ session('message') }}");
+    @endif
+
+    @if(Session::has('error'))
+    toastr.options =
+    {
+        "closeButton" : true,
+        "progressBar" : true
+    }
+            toastr.error("{{ session('error') }}");
+    @endif
+
+    @if(Session::has('info'))
+    toastr.options =
+    {
+        "closeButton" : true,
+        "progressBar" : true
+    }
+            toastr.info("{{ session('info') }}");
+    @endif
+
+    @if(Session::has('warning'))
+    toastr.options =
+    {
+        "closeButton" : true,
+        "progressBar" : true
+    }
+            toastr.warning("{{ session('warning') }}");
+    @endif
+  </script>
+
+  {{-- sweet alert cdn --}}
+  <script>
+    function confirmation(ev)
+    {
+
+        ev.preventDefault();
+        var urlToRedirect = ev.currentTarget.getAttribute('href');
+
+            swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this  file!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+            })
+            .then((willDelete) => {
+            if (willDelete) {
+                window.location.href=urlToRedirect;
+            }
+            });
+
+
+    }
+</script>
 </body>
 </html>

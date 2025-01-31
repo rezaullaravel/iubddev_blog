@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CategoryController;
 
 
@@ -14,5 +15,18 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
    Route::get('/category-edit/{id}',[CategoryController::class,'edit'])->name('admin.category.edit');
    Route::post('/category-update',[CategoryController::class,'update'])->name('admin.category.update');
    Route::get('/category-delete/{id}',[CategoryController::class,'delete'])->name('admin.category.delete');
+
+   //blog
+   Route::get('/blog-list',[BlogController::class,'index'])->name('admin.blog.index');
+   Route::get('/blog-create',[BlogController::class,'create'])->name('admin.blog.create');
+   Route::post('/blog-store',[BlogController::class,'store'])->name('admin.blog.store');
+   Route::get('/blog-edit/{id}',[BlogController::class,'edit'])->name('admin.blog.edit');
+   Route::post('/blog-update/{id}',[BlogController::class,'update'])->name('admin.blog.update');
+   Route::get('/blog-delete/{id}',[BlogController::class,'delete'])->name('admin.blog.delete');
 });
 
+
+//404 page
+Route::get('/{any}', function () {
+    return view('welcome'); // 404 page
+})->where('any', '.*');

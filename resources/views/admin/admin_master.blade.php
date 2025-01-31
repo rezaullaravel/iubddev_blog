@@ -42,6 +42,10 @@
     {{-- sweet alert cdn --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 
+    {{-- data table cdn --}}
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.2.1/css/dataTables.dataTables.css" />
+    <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
@@ -162,6 +166,11 @@
 
 
     }
+</script>
+
+{{-- data table --}}
+<script>
+    let table = new DataTable('#example');
 </script>
 </body>
 </html>

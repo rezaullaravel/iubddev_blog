@@ -8,7 +8,11 @@
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
-
+        <li class="nav-item">
+            <a class="nav-link btn btn-primary text-white"  href="{{ url('/') }}" role="button">
+              Back To Site
+            </a>
+          </li>
 
 
       <li class="nav-item">

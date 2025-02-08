@@ -41,7 +41,7 @@
 
 
                         <li class="nav-item active">
-                            <a class="nav-link" href="index.html">হোম</a>
+                            <a class="nav-link" href="{{ url('/') }}">হোম</a>
 
                         </li>
                         <li class="nav-item"><a class="nav-link" href="about.html">এবাউট</a></li>
@@ -57,7 +57,7 @@
                       <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">লগিন/সাইন আপ</a></li>
                       @endif
                     @else
-                        <a class="nav-link" href="index.html">Home</a>
+                        <a class="nav-link" href="{{ url('/') }}">Home</a>
 
                         </li>
                         <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>

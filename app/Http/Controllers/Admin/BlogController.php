@@ -75,6 +75,7 @@ class BlogController extends Controller
         $blog->desc_en = $request->desc_en;
         $blog->desc_bn = $request->desc_bn;
         $blog->status = $request->status;
+        $blog->is_popular = $request->is_popular;
         if(!empty($request->image)){
             $blog->image =  $imagePath;
         }
@@ -86,7 +87,7 @@ class BlogController extends Controller
     //delete
     public function delete($id){
         $blog = Blog::find($id);
-        
+
         if(File::exists($blog->image)){
             unlink($blog->image);
         }

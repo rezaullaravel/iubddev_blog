@@ -141,42 +141,76 @@
                             </form>
                         </div>
                         <div class="sidebar-widget latest-post mb-3">
-                            <h5>Popular Posts</h5>
-                            <div class="py-2">
-                                <span class="text-sm text-muted">03 Mar 2018</span>
-                                <h6 class="my-2"><a href="#">Thoughtful living in los Angeles</a></h6>
-                            </div>
-                            <div class="py-2">
-                                <span class="text-sm text-muted">03 Mar 2018</span>
-                                <h6 class="my-2"><a href="#">Vivamus molestie gravida turpis.</a></h6>
-                            </div>
-                            <div class="py-2">
-                                <span class="text-sm text-muted">03 Mar 2018</span>
-                                <h6 class="my-2"><a href="#">Fusce lobortis lorem at ipsum semper sagittis</a>
-                                </h6>
-                            </div>
+                            <h5>
+                                @if (Session::get('lang') == 'bangla')
+                                    জনপ্রিয় পোস্ট
+                                @else
+                                    Popular Posts
+                                @endif
+
+                            </h5>
+
+                            @php
+                                $popular_blogs = App\Models\Blog::
+                                where(['status'=>1,'is_popular'=>1])
+                                ->where('id','!=',$blog->id)
+                                    ->orderBy('id', 'desc')
+                                    ->limit(8)
+                                    ->get();
+                            @endphp
+
+                            @foreach ($popular_blogs as $blog)
+                                <div class="py-2">
+                                    <span class="text-sm text-muted">
+                                        @if (session()->get('lang') == 'bangla')
+                                            {{ convertToBanglaDate($blog->created_at) }}
+                                        @else
+                                            {{ date('d-F-Y', strtotime($blog->created_at)) }}
+                                        @endif
+                                    </span>
+                                    <h6 class="my-2">
+                                        <a href="{{ route('blog.details',[
+                                        'id'=>$blog->id,
+                                        'slug'=>$blog->slug
+                                        ]) }}">
+                                            @if (session()->get('lang') == 'bangla')
+                                            {{ $blog->title_bn }}
+                                        @else
+                                            {{ $blog->title_en }}
+                                        @endif
+                                        </a>
+                                    </h6>
+                                </div>
+                            @endforeach
+
                         </div>
                         <div class="sidebar-widget category mb-3">
                             <h5 class="mb-4">
                                 @if (session()->get('lang') == 'bangla')
-                                ক্যাটাগরি
-                            @else
-                            Category
-                            @endif
+                                    ক্যাটাগরি
+                                @else
+                                    Category
+                                @endif
                             </h5>
                             <ul class="list-unstyled">
 
 
                                 @foreach ($categories as $category)
                                     <li class="align-items-center">
-                                        <a href="#">
+                                        <a href="{{ route('categorywiseBlog',[
+                                        'category_id'=>$category->id,
+                                        'slug'=>$category->slug
+                                        ]) }}">
                                             @if (session()->get('lang') == 'bangla')
                                                 {{ $category->name_bn }}
                                             @else
-                                            {{ $category->name_en }}
+                                                {{ $category->name_en }}
                                             @endif
                                         </a>
-                                        <span>(14)</span>
+                                        @php
+                                        $catBlogs = App\Models\Blog::where('status',1)->where('category_id',$category->id)->count();
+                                        @endphp
+                                        <span>({{ $catBlogs }})</span>
                                     </li>
                                 @endforeach
                             </ul>

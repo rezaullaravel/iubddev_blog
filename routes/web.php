@@ -9,6 +9,7 @@ use App\Http\Controllers\LanguageSettingController;
 //home page
 Route::get('/',[HomeController::class,'index'])->name('home');
 Route::get('/blog-details/{id}/{slug}',[HomeController::class,'blogDetails'])->name('blog.details');
+Route::get('/category-blog/{category_id}/{slug}',[HomeController::class,'categoryWiseBlogs'])->name('categorywiseBlog');
 
 
 

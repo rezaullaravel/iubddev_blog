@@ -75,6 +75,14 @@
                             </select>
                         </div>
 
+                        <div class="form-group">
+                            <label for="">Is Popular <span class="text-danger">*</span> </label>
+                            <select name="is_popular" class="form-control" required>
+                                <option value="1" {{ $blog->is_popular=='1' ? 'selected':'' }}>Yes</option>
+                                <option value="0" {{ $blog->is_popular=='0' ? 'selected':'' }}>No</option>
+                            </select>
+                        </div>
+
                         <div class="form-group text-right">
                             <input type="submit" value="Update" class="btn btn-primary">
                         </div>

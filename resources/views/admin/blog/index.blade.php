@@ -28,6 +28,7 @@
                                 <th>Description</th>
                                 <th>Image</th>
                                 <th>Status</th>
+                                <th>Is Popular</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -49,6 +50,14 @@
                                       <span class="badge badge-primary">Published</span>
                                     @else
                                     <span class="badge badge-danger">Not Published</span>
+                                    @endif
+                                 </td>
+
+                                 <td>
+                                    @if ($row->is_popular==1)
+                                      <span class="badge badge-primary">Yes</span>
+                                    @else
+                                    <span class="badge badge-danger">No</span>
                                     @endif
                                  </td>
                                  <td>

@@ -8,6 +8,9 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
+
 
 class BlogController extends Controller
 {
@@ -28,10 +31,18 @@ class BlogController extends Controller
 
         //image upload
         if($request->image){
-            $image = $request->image;
-            $imageName = rand().'.'.$image->getClientOriginalName();
-            $image->move('upload/blog_images/',$imageName);
-            $imagePath = 'upload/blog_images/'.$imageName;
+
+
+            $file = $request->file('image');
+            $fileName = rand().'.'.$file->getClientOriginalName();
+            $filePath = 'upload/blog_images/'.$fileName;
+
+            //create image manager with desired driver
+             $manager = new ImageManager(new Driver());
+             $image = $manager->read($file);
+
+             $image->resize(500,400);
+             $image->save(public_path('upload/blog_images/').$fileName);
         }
 
         $blog = new Blog;
@@ -41,7 +52,7 @@ class BlogController extends Controller
         $blog->slug = Str::slug($request->title_en);
         $blog->desc_en = $request->desc_en;
         $blog->desc_bn = $request->desc_bn;
-        $blog->image =  $imagePath;
+        $blog->image =  $filePath;
         $blog->save();
         return redirect()->route('admin.blog.index')->with('message','Blog Created Successfully');
     }
@@ -61,10 +72,20 @@ class BlogController extends Controller
             if(File::exists($blog->image)){
                 unlink($blog->image);
             }
-            $image = $request->image;
-            $imageName = rand().'.'.$image->getClientOriginalName();
-            $image->move('upload/blog_images/',$imageName);
-            $imagePath = 'upload/blog_images/'.$imageName;
+            // $image = $request->image;
+            // $imageName = rand().'.'.$image->getClientOriginalName();
+            // $image->move('upload/blog_images/',$imageName);
+            // $imagePath = 'upload/blog_images/'.$imageName;
+            $file = $request->file('image');
+            $fileName = rand().'.'.$file->getClientOriginalName();
+            $filePath = 'upload/blog_images/'.$fileName;
+
+            //create image manager with desired driver
+             $manager = new ImageManager(new Driver());
+             $image = $manager->read($file);
+
+             $image->resize(500,400);
+             $image->save(public_path('upload/blog_images/').$fileName);
         }
 
 
@@ -77,7 +98,7 @@ class BlogController extends Controller
         $blog->status = $request->status;
         $blog->is_popular = $request->is_popular;
         if(!empty($request->image)){
-            $blog->image =  $imagePath;
+            $blog->image =  $filePath;
         }
 
         $blog->save();

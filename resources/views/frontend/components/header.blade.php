@@ -21,76 +21,150 @@
             </div>
         </div>
     </div>
-    <nav class="navbar navbar-expand-lg navigation" id="navbar">
+    <nav class="navbar">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="images/logo.png" alt="" class="img-fluid">
+                <img src="images/logo.png" alt="Logo" class="img-fluid">
             </a>
 
-            <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain"
-                aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="icofont-navigation-menu"></span>
-            </button>
+            <!-- Custom Toggler -->
+            <input type="checkbox" id="menu-toggle" class="menu-toggle">
+            <label for="menu-toggle" class="menu-icon">&#9776;</label>
 
-            <div class="collapse navbar-collapse" id="navbarmain">
-                <ul class="navbar-nav ml-auto">
-
-
-                    @if (Session::get('lang') == 'bangla')
-                        <li class="nav-item active">
+            <!-- Collapsible Menu -->
+            <ul class="nav-menu">
 
 
-                        <li class="nav-item active">
-                            <a class="nav-link" href="{{ url('/') }}">হোম</a>
+                @if (Session::get('lang') == 'bangla')
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">হোম </a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">এবাউট </a></li>
+                    <li class="nav-item"><a class="nav-link" href="service.html">কন্টাক্ট </a></li>
+                @else
+                    <li class="nav-item"><a class="nav-link" href="{{ url('/') }}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="service.html">Contact</a></li>
+                @endif
 
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">এবাউট</a></li>
-                        <li class="nav-item"><a class="nav-link" href="service.html">কন্টাক্ট</a></li>
-                        @if (Auth::check())
-
-                        @if (Auth::user()->role == 'admin')
-                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">ড্যাশবোর্ড</a></li>
-                        @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('user.dashboard') }}">ড্যাশবোর্ড</a></li>
-                        @endif
-                      @else
-                      <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">লগিন/সাইন আপ</a></li>
-                      @endif
+                @if (Auth::check())
+                    @if (Auth::user()->role == 'admin')
+                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">
+                                @if (Session::get('lang') == 'bangla')
+                                    ড্যাশবোর্ড
+                                @else
+                                    Dashboard
+                                @endif
+                            </a></li>
                     @else
-                        <a class="nav-link" href="{{ url('/') }}">Home</a>
-
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="service.html">Contact</a></li>
-
-                        @if (Auth::check())
-
-                        @if (Auth::user()->role == 'admin')
-                        <li class="nav-item"><a class="nav-link" href="{{ route('admin.dashboard') }}">Dashboard</a></li>
-                        @else
-                        <li class="nav-item"><a class="nav-link" href="{{ route('user.dashboard') }}">Dashboard</a></li>
-                        @endif
-                      @else
-                      <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login/Signup</a></li>
-                      @endif
+                        <li class="nav-item"><a class="nav-link" href="{{ route('user.dashboard') }}">
+                                @if (Session::get('lang') == 'bangla')
+                                    ড্যাশবোর্ড
+                                @else
+                                    Dashboard
+                                @endif
+                            </a></li>
                     @endif
+                @else
+                    <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">
 
+                            @if (Session::get('lang') == 'bangla')
+                                লগিন/সাইন আপ
+                            @else
+                                Login/Signup
+                            @endif
+                        </a></li>
+                @endif
 
-
-
-
-
-
-                    @if (Session::get('lang') == 'bangla')
-                        <li class="nav-item"><a class="nav-link text-danger"
-                                href="{{ route('set.english') }}">English</a></li>
-                    @else
-                        <li class="nav-item"><a class="nav-link text-danger" href="{{ route('set.bangla') }}">বাংলা</a>
-                        </li>
-                    @endif
-
-                </ul>
-            </div>
+                @if (Session::get('lang') == 'bangla')
+                    <li class="nav-item"><a class="nav-link text-danger" href="{{ route('set.english') }}">English</a>
+                    </li>
+                @else
+                    <li class="nav-item"><a class="nav-link text-danger" href="{{ route('set.bangla') }}">বাংলা</a></li>
+                @endif
+            </ul>
         </div>
     </nav>
+
 </header>
+
+<style>
+    /* 🔹 General Navbar Styles */
+    .navbar {
+        background: #fff;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        padding: 15px 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    /* 🔹 Logo */
+    .navbar-brand img {
+        max-height: 50px;
+    }
+
+    /* 🔹 Navigation Menu */
+    .nav-menu {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+    }
+
+    .nav-menu .nav-item {
+        margin: 0 15px;
+    }
+
+    .nav-menu .nav-link {
+        color: #333;
+        font-weight: 500;
+        padding: 10px 15px;
+        text-decoration: none;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .nav-menu .nav-link:hover {
+        color: #007bff;
+    }
+
+    /* 🔹 Mobile Menu Toggle */
+    .menu-toggle {
+        display: none;
+    }
+
+    .menu-icon {
+        font-size: 28px;
+        cursor: pointer;
+        display: none;
+    }
+
+    /* 🔹 Responsive Menu */
+    @media (max-width: 991px) {
+        .menu-icon {
+            display: block;
+        }
+
+        .nav-menu {
+            display: none;
+            flex-direction: column;
+            position: absolute;
+            top: 60px;
+            right: 20px;
+            width: 200px;
+            background: #fff;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .nav-menu .nav-item {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Show Menu When Checkbox is Checked */
+        .menu-toggle:checked+.menu-icon+.nav-menu {
+            display: flex;
+        }
+    }
+</style>

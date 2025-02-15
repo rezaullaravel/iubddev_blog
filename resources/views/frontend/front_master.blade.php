@@ -10,7 +10,6 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
-
     <!-- bootstrap.min css -->
     <link rel="stylesheet" href="{{ asset('/') }}frontend/plugins/bootstrap/css/bootstrap.min.css">
     <!-- Icon Font Css -->
@@ -22,8 +21,9 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{ asset('/') }}frontend/css/style.css">
 
-    <!--livewire style-->
-    @livewireStyles
+
+
+
 
 </head>
 
@@ -65,8 +65,7 @@
     <script src="{{ asset('/') }}frontend/js/contact.js"></script>
 
 
-    <!--livewire script-->
-    @livewireScripts
+
 
 </body>
 

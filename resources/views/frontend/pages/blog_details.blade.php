@@ -1,11 +1,13 @@
 @extends('frontend.front_master')
-
 @section('title')
     {{ 'Blog Details Page' }}
 @endsection
-@section('content')
-<script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 
+
+
+@section('content')
+
+<script src="https://unpkg.com/@tailwindcss/browser@4"></script>
     <section class="section blog-wrap">
         <div class="container">
             <div class="row">
@@ -71,4 +73,8 @@
             </div>
         </div>
     </section>
+
+
 @endsection
+
+

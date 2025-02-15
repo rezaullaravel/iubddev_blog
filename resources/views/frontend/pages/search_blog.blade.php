@@ -9,8 +9,7 @@
             <div class="row">
                 <div class="col-lg-8">
                     <div class="row">
-
-                        @foreach ($categoryBlogs as $blog)
+                        @foreach ($searchBlogs as $blog)
                             <div class="col-lg-12 col-md-12 mb-5">
                                 <div class="blog-item">
                                     <div class="blog-thumb">
@@ -67,9 +66,9 @@
                         {{-- pagination  --}}
                         <div>
                             @if (session()->get('lang') == 'bangla')
-                                {{ $categoryBlogs->links('vendor.pagination.bangla') }}
+                                {{ $searchBlogs->appends(['string' => $search_term])->links('vendor.pagination.bangla') }}
                             @else
-                                {{ $categoryBlogs->links('vendor.pagination.bootstrap-5') }}
+                                {{ $searchBlogs->appends(['string' => $search_term])->links('vendor.pagination.bootstrap-5') }}
                             @endif
                         </div>
                         {{-- pagination  --}}
@@ -77,7 +76,7 @@
                 </div>
 
                 @include('frontend.components.right-side')
-                
+
             </div>
         </div>
     </section>

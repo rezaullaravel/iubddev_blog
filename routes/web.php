@@ -12,6 +12,8 @@ Route::get('/blog-details/{id}/{slug}',[HomeController::class,'blogDetails'])->n
 Route::get('/category-blog/{category_id}/{slug}',[HomeController::class,'categoryWiseBlogs'])->name('categorywiseBlog');
 
 
+//blog search
+Route::get('/blog-search',[HomeController::class,'blogSearch'])->name('blog.search');
 
 
 //language set

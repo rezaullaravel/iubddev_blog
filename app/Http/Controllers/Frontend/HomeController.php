@@ -27,4 +27,15 @@ class HomeController extends Controller
         $categories = Category::select('id','slug','name_en','name_bn')->get();
         return view('frontend.pages.categorywise_blog',compact('categoryBlogs','categories'));
     }
+
+    //blog search
+    public function blogSearch(Request $request){
+        $search_term = $request->string;
+        $searchBlogs = Blog::where('title_en','Like','%'.$search_term.'%')
+                             ->orWhere('title_bn','Like','%'.$search_term.'%')
+                             ->paginate(1);
+
+        $categories = Category::select('id','slug','name_en','name_bn')->get();
+         return view('frontend.pages.search_blog',compact('searchBlogs','search_term','categories'));
+    }
 }

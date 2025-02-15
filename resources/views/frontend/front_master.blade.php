@@ -22,6 +22,9 @@
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="{{ asset('/') }}frontend/css/style.css">
 
+    <!--livewire style-->
+    @livewireStyles
+
 </head>
 
 <body id="top">
@@ -60,6 +63,10 @@
 
     <script src="{{ asset('/') }}frontend/js/script.js"></script>
     <script src="{{ asset('/') }}frontend/js/contact.js"></script>
+
+
+    <!--livewire script-->
+    @livewireScripts
 
 </body>
 

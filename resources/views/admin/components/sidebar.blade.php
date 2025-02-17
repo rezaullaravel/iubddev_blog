@@ -53,6 +53,16 @@
           </li>
 
           <li class="nav-item">
+            <a href="{{ route('admin.site.setting') }}" class="nav-link {{ request()->is('admin/site-setting') ? 'active':'' }}">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Site Setting
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+          </li>
+
+          <li class="nav-item">
             <a href="{{ route('logout') }}" class="nav-link">
               <i class="nav-icon fas fa-chart-pie"></i>
               <p>

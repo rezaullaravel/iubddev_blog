@@ -117,6 +117,31 @@ class BlogController extends Controller
         return redirect()->back()->with('message','Blog Deleted Successfully');
     }
 
+     //ck editor image upload and update
+     public function uploadCkeditor(Request $request){
+        // Check if there is a file in the request
+        if($request->hasFile('upload')){
+            // Get the old image URL from the request if available
+            $oldImageUrl = $request->input('oldImage');
+
+            // Delete the old image if it exists
+            if ($oldImageUrl && file_exists(public_path($oldImageUrl))) {
+                unlink(public_path($oldImageUrl));
+            }
+
+            // Upload the new image
+            $image = $request->file('upload');
+            $imgName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('upload/ckeditor_images/'), $imgName);
+            $url = url('upload/ckeditor_images/' . $imgName); // Generate the full URL
+
+            return response()->json([
+                'url' => $url, // Provide the URL to the uploaded image
+                'uploaded' => true // Indicate successful upload
+            ]);
+        }
+    }
+
 
 
 }

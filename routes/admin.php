@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CategoryController;
 
 
@@ -23,6 +24,12 @@ Route::middleware(['admin'])->prefix('admin')->group(function () {
    Route::get('/blog-edit/{id}',[BlogController::class,'edit'])->name('admin.blog.edit');
    Route::post('/blog-update/{id}',[BlogController::class,'update'])->name('admin.blog.update');
    Route::get('/blog-delete/{id}',[BlogController::class,'delete'])->name('admin.blog.delete');
+   //for ck editor
+   Route::post('/ckeditor/upload', [BlogController::class, 'uploadCkeditor'])->name('ckeditor.upload');
+
+   //site setting
+   Route::get('/site-setting',[SettingController::class,'index'])->name('admin.site.setting');
+   Route::post('/site-setting-update/{id}',[SettingController::class,'update'])->name('admin.site-setting.update');
 });
 
 

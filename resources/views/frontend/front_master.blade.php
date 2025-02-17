@@ -8,8 +8,9 @@
 
     <title> @yield('title') </title>
 
+    
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset($setting->favicon) }}" />
     <!-- bootstrap.min css -->
     <link rel="stylesheet" href="{{ asset('/') }}frontend/plugins/bootstrap/css/bootstrap.min.css">
     <!-- Icon Font Css -->

@@ -43,12 +43,12 @@
 
                         <div class="form-group">
                             <label for="">Description English <span class="text-danger">*</span> </label>
-                            <textarea name="desc_en" class="form-control" required rows="5"></textarea>
+                            <textarea name="desc_en" id="desc_en" class="form-control" required rows="5"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="">Description Bangla <span class="text-danger">*</span> </label>
-                            <textarea name="desc_bn" class="form-control" required rows="5"></textarea>
+                            <textarea name="desc_bn" id="desc_bn"  class="form-control" required rows="5"></textarea>
                         </div>
 
                         <div class="form-group">
@@ -69,7 +69,7 @@
       <!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
-
+  <script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
     {{-- javascript for post   image --}}
     <script type="text/javascript">
         function postImgUrl(input){
@@ -83,4 +83,36 @@
         }
     </script>
     {{-- javascript for post image end --}}
+
+    <script>
+         ClassicEditor
+            .create(document.querySelector('#desc_en'), {
+                ckfinder: {
+                    uploadUrl: '{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}'
+                }
+            })
+
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+
+            ClassicEditor
+            .create(document.querySelector('#desc_bn'), {
+                ckfinder: {
+                    uploadUrl: '{{ route('ckeditor.upload') . '?_token=' . csrf_token() }}'
+                }
+            })
+
+            .then(editor => {
+                console.log(editor);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+    </script>
 @endsection

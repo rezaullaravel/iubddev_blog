@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.blog.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('admin.blog.store') }}" method="POST" enctype="multipart/form-data" id="myForm" >
                         @csrf
 
                         <div class="form-group">
@@ -43,12 +43,12 @@
 
                         <div class="form-group">
                             <label for="">Description English <span class="text-danger">*</span> </label>
-                            <textarea name="desc_en" id="desc_en" class="form-control" required rows="5"></textarea>
+                            <textarea name="desc_en" id="desc_en" class="form-control"  rows="5"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="">Description Bangla <span class="text-danger">*</span> </label>
-                            <textarea name="desc_bn" id="desc_bn"  class="form-control" required rows="5"></textarea>
+                            <textarea name="desc_bn" id="desc_bn"  class="form-control"  rows="5"></textarea>
                         </div>
 
                         <div class="form-group">
@@ -59,7 +59,10 @@
                         </div>
 
                         <div class="form-group text-right">
-                            <input type="submit" value="Submit" class="btn btn-primary">
+                            <button type="submit"  class="btn btn-primary" id="submitButton">
+                                <span class="spinner-border spinner-border-sm d-none" id="spinner" role="status" aria-hidden="true"></span>
+                                Submit
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -69,6 +72,7 @@
       <!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
+
   <script src="{{ asset('ckeditor5/ckeditor.js') }}"></script>
     {{-- javascript for post   image --}}
     <script type="text/javascript">
@@ -84,7 +88,20 @@
     </script>
     {{-- javascript for post image end --}}
 
+    {{-- bootstrap spinner --}}
     <script>
+        $(document).ready(function() {
+            $("#myForm").on("submit", function(event) {
+
+
+                $("#submitButton").attr("disabled", true);  // Disable button
+                $("#spinner").removeClass("d-none");        // Show spinner
+            });
+        });
+        </script>
+
+
+    <script type="text/javascript">
          ClassicEditor
             .create(document.querySelector('#desc_en'), {
                 ckfinder: {
@@ -113,6 +130,7 @@
             .catch(error => {
                 console.error(error);
             });
+        </script>
 
-    </script>
+
 @endsection

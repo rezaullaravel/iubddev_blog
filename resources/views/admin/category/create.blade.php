@@ -18,7 +18,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('admin.category.store') }}" method="POST">
+                    <form action="{{ route('admin.category.store') }}" method="POST" id="myForm">
                         @csrf
                         <div class="form-group">
                             <label for="">Category English <span class="text-danger">*</span> </label>
@@ -31,7 +31,10 @@
                         </div>
 
                         <div class="form-group text-right">
-                            <input type="submit" value="Submit" class="btn btn-primary">
+                            <button type="submit"  class="btn btn-primary" id="submitButton">
+                                <span class="spinner-border spinner-border-sm d-none" id="spinner" role="status" aria-hidden="true"></span>
+                                Submit
+                            </button>
                         </div>
                     </form>
                 </div>
@@ -41,4 +44,16 @@
       <!-- /.row -->
     </div><!-- /.container-fluid -->
   </section>
+
+  {{-- bootstrap spinner --}}
+  <script>
+    $(document).ready(function() {
+        $("#myForm").on("submit", function(event) {
+
+
+            $("#submitButton").attr("disabled", true);  // Disable button
+            $("#spinner").removeClass("d-none");        // Show spinner
+        });
+    });
+    </script>
 @endsection

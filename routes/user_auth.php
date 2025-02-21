@@ -8,7 +8,10 @@ Route::get('/login',[AuthController::class,'loginForm'])->name('login');
 Route::post('/login',[AuthController::class,'postLogin'])->name('login');
 Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 
+Route::get('/registration',[AuthController::class,'registrationForm'])->name('registration');
+Route::post('/post-register',[AuthController::class,'postRegister'])->name('post.register');
 
+Route::get('/verify/account/{code}',[AuthController::class,'verifyAccount'])->name('verify.account');
 //admin dashboard
 
 

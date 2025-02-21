@@ -42,6 +42,14 @@
                     </div>
                 @endif
 
+                @if (session('message'))
+                    <div class="alert alert-danger">
+                        <p>{{ session('message') }}</p>
+                    </div>
+                @endif
+
+
+
                 <form action="{{ route('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">
@@ -76,6 +84,10 @@
                         <div class="col-4">
                             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
                         </div>
+
+                        <p>Have You not an account? Sign up from
+                            <a href="{{ route('registration') }}">Here</a>
+                        </p>
                         <!-- /.col -->
                     </div>
                 </form>
